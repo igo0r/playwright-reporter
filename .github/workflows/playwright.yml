@@ -29,10 +29,10 @@ jobs:
     - name: Extract summary
       id: summary
       run: |
-        passed=$(js '.stats.expected' tests-results.json)
-        failed=$(js '.stats.unexpected' tests-results.json)
-        skipped=$(js '.stats.skipped' tests-results.json)
-        echo "summary=✅ $passed passed 🛑 $failes failed 🟡 $skipped skipped" >> GITHUB_OUTPUT
+        passed=$(jq '.stats.expected' tests-results.json)
+        failed=$(jq '.stats.unexpected' tests-results.json)
+        skipped=$(jq '.stats.skipped' tests-results.json)
+        echo "summary=✅ $passed passed 🛑 $failed failed 🟡 $skipped skipped" >> $GITHUB_OUTPUT
     - name: Create comment
       uses: peter-evans/create-or-update-comment@v5
       with:
